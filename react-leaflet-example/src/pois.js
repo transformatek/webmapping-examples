@@ -1,4 +1,4 @@
-var pois =[
+const pois =[
   {
     "id": 1,
     "city": "Adrar",

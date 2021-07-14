@@ -1,15 +1,16 @@
-import { MapContainer, TileLayer, GeoJSON, LayersControl, Popup, Marker,Tooltip  } from 'react-leaflet';
+import { MapContainer, TileLayer, LayersControl, Marker, Tooltip } from 'react-leaflet';
 import pois from '../pois.js';
 import toGeoJson from '../utils.js'
-import React, { useState } from "react";
+import React from "react";
 
-
+import SearchField from './Search.js'
 const Map = () => {
 
     const center = [35.0, -1.0];
-    const [selectedFeature, setSelectedFeature] = useState({});
+    // const [selectedFeature, setSelectedFeature] = useState({});
 
     const points = toGeoJson(pois);
+
 
     return (
 
@@ -18,7 +19,7 @@ const Map = () => {
             <MapContainer center={center}
                 zoom={10}
             >
-                <LayersControl>
+                <LayersControl position='bottomright'>
                     <LayersControl.BaseLayer checked name="OpenStreetMap.Mapnik">
                         <TileLayer
                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -34,7 +35,7 @@ const Map = () => {
                     <LayersControl.BaseLayer name="Carto Light">
                         <TileLayer
                             attribution='&copy; Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL. '
-                            url=" 	https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+                            url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
                         />
                     </LayersControl.BaseLayer>
                 </LayersControl>
@@ -48,18 +49,15 @@ const Map = () => {
                             ]}
                             eventHandlers={{
                                 click: () => {
-                                 
                                 },
-                              }}
+                            }}
                         >
-                            {/* <Popup>
-                                <p>{feature.properties.city}</p>
-                            </Popup> */}
                             <Tooltip>{feature.properties.city}</Tooltip>
                         </Marker>
                     );
                 })}
 
+                <SearchField/>
 
             </MapContainer>
         </div>
