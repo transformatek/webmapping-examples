@@ -15,25 +15,24 @@ const icon = L.icon({
 const SearchField = () => {
 
   const map = useMap();
-
-  useEffect(() => {
-    const provider = new OpenStreetMapProvider({
-        params: {
-            countrycodes: 'dz', 
-          },
-    });
-
-    const searchControl = new GeoSearchControl({
-      provider: provider,
-      style: 'bar',
-      marker :{
-          icon
+  const provider = new OpenStreetMapProvider({
+    params: {
+        countrycodes: 'dz', 
       },
-      resultFormat: ({ result }) => result.label, 
-      retainZoomLevel: false,
-      showPopup: true,
+});
 
-    });
+const searchControl = new GeoSearchControl({
+  provider: provider,
+  style: 'bar',
+  marker :{
+      icon
+  },
+  resultFormat: ({ result }) => result.label, 
+  retainZoomLevel: false,
+  showPopup: true,
+
+});
+  useEffect(() => {
     map.addControl(searchControl);
     return () => map.removeControl(searchControl);
   }, [])

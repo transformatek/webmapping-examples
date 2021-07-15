@@ -1,14 +1,15 @@
-import { MapContainer, TileLayer, LayersControl, Marker, Tooltip } from 'react-leaflet';
+import { MapContainer, TileLayer, LayersControl, Marker, Tooltip,Popup } from 'react-leaflet';
 import pois from '../pois.js';
 import toGeoJson from '../utils.js'
-import React from "react";
+import React,{useState} from "react";
 
 import SearchField from './Search.js'
+import Details from './Details.js';
 const Map = () => {
 
     const center = [35.0, -1.0];
-    // const [selectedFeature, setSelectedFeature] = useState({});
-
+    const [selectedFeature, setSelectedFeature] = useState({});
+    const [open,setOpen] = useState(false);
     const points = toGeoJson(pois);
 
 
@@ -40,25 +41,32 @@ const Map = () => {
                     </LayersControl.BaseLayer>
                 </LayersControl>
 
-                {points.features.map((feature) => {
+                {pois.map((feature) => {
                     return (
                         <Marker
                             position={[
-                                feature.geometry.coordinates[1],
-                                feature.geometry.coordinates[0]
+                                feature.lat,
+                                feature.lon
                             ]}
                             eventHandlers={{
                                 click: () => {
+                                    setSelectedFeature(feature)
+                                    setOpen(true);
+                                    console.log(feature);
                                 },
                             }}
                         >
-                            <Tooltip>{feature.properties.city}</Tooltip>
+                            <Popup>{feature.title}</Popup>
                         </Marker>
                     );
                 })}
-
-                <SearchField/>
-
+                
+                { open &&
+                <Details feature={selectedFeature}
+                        setOpen={setOpen}
+                />
+            }       
+                <SearchField />
             </MapContainer>
         </div>
     )

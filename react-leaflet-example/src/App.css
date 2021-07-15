@@ -2,3 +2,41 @@
 	width: 100vw;
 	height: 100vh;
 }
+
+
+.details-container {
+	z-index: 1000;
+	position: absolute;
+	width: 350px;
+	height: 20%;
+	overflow-y: scroll;
+	background-color: white;
+	right: 10px;
+	top: 10px;
+	border: 2px solid rgba(0,0,0,0.2);
+	cursor :pointer
+	
+  }
+
+  .details-info{
+	margin-top:30px;
+	padding-left:20px;
+	line-height: 1.5rem;
+	font-size:1rem; 
+	
+  }
+
+  .details-close{
+		position: absolute;
+		right: 1px;
+		top: 2px;
+		cursor: pointer;
+		color:grey;
+
+  }
+
+ 
+  table {
+    table-layout: auto;
+    width: 100%;
+}
