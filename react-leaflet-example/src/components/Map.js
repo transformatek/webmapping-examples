@@ -1,7 +1,6 @@
-import { MapContainer, TileLayer, LayersControl, Marker, Tooltip,Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, LayersControl, Marker, Popup } from 'react-leaflet';
 import pois from '../pois.js';
-import toGeoJson from '../utils.js'
-import React,{useState} from "react";
+import React, { useState } from "react";
 
 import SearchField from './Search.js'
 import Details from './Details.js';
@@ -9,9 +8,7 @@ const Map = () => {
 
     const center = [35.0, -1.0];
     const [selectedFeature, setSelectedFeature] = useState({});
-    const [open,setOpen] = useState(false);
-    const points = toGeoJson(pois);
-
+    const [open, setOpen] = useState(false);
 
     return (
 
@@ -52,7 +49,6 @@ const Map = () => {
                                 click: () => {
                                     setSelectedFeature(feature)
                                     setOpen(true);
-                                    console.log(feature);
                                 },
                             }}
                         >
@@ -60,12 +56,12 @@ const Map = () => {
                         </Marker>
                     );
                 })}
-                
-                { open &&
-                <Details feature={selectedFeature}
+
+                {open &&
+                    <Details feature={selectedFeature}
                         setOpen={setOpen}
-                />
-            }       
+                    />
+                }
                 <SearchField />
             </MapContainer>
         </div>
